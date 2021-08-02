@@ -3,25 +3,25 @@ export const environment = {
   production: true,
 
   owner: {
-    host: 'http://localhost:8080/api/owner'
+    host: 'http://3.137.213.20:8085/api/owner'
   },
 
   client: {
-    host: 'http://localhost:8080/api/client'
+    host: 'http://3.137.213.20:8085/api/client'
   },
 
   business: {
-    host: 'http://localhost:8080/api/business'
+    host: 'http://3.137.213.20:8085/api/business'
   },
 
   product: {
-    host: 'http://localhost:8080/api/product',
-    hostFilter: 'http://localhost:8080/api/product/filter-products/'
+    host: 'http://3.137.213.20:8085/api/product',
+    hostFilter: 'http://3.137.213.20:8085/api/product/filter-products/'
   },
 
   bill: {
-    host: 'http://localhost:8080/api/bill',
-    update: 'http://localhost:8080/api/bill-client'
+    host: 'http://3.137.213.20:8085/api/bill',
+    update: 'http://3.137.213.20:8085/api/bill-client'
   }
 
 
