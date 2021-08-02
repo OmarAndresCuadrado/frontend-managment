@@ -1,0 +1,32 @@
+/* .modal {
+    position: absolute;
+    float: left;
+    left: 30%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  } */
+
+.modal {
+  position: absolute;
+  float: left;
+  left: 35%;
+  top: 50%;
+  margin: auto;
+  max-width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.personalScroll {
+  overflow-x: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.personalScroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.personalScroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

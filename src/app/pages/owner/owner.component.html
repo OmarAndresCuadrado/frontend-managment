@@ -1,0 +1,108 @@
+<app-header></app-header>
+
+<div class="col espacioArriba"></div>
+<div class="container">
+    <div class="row espacioArriba">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center espacioAbajo text-primary">
+            <h1>Lista de clientes</h1>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12 text-center text-dark">
+            <div class="form-group">
+                <input type="text" class="form-control" name="filterProyect"
+                    placeholder="Buscar cliente por nombre o numero de celular" [(ngModel)]="filterProyect">
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="card text-white bg-light espacioArriba">
+    <div class="my-2 text-right" style="padding-right: 20px;">
+        <button class="btn btn-outline-info" type="button" [routerLink]="['/clientForm']">Crear Cliente</button>
+    </div>
+
+    <div class="card-body text-primary" style="padding-bottom: 40px;">
+
+
+        <div *ngIf="listOfOwners?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos
+        </div>
+        <table class="table table-bordered table-striped text-center" ngif="clients?.length > 0">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Fecha de creacion</th>
+                    <th scope="col"> Ver lista de productos y clientes asociados al negocio</th>
+                    <th scope="col"> activo</th>
+                    <th scope="col"> role</th>
+                    <th scope="col"> Editar</th>
+                    <th scope="col"> Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let owner of listOfOwners">
+                    <td>{{owner.name}}</td>
+                    <td>{{owner.lastName}}</td>
+                    <td>{{owner.address}}</td>
+                    <td>{{owner.phone}}</td>
+                    <td>{{owner.email}}</td>
+                    <td>{{owner.enabled}}</td>
+                    <td>{{owner.role}}</td>
+
+
+
+                    <!-- TODO: Cuando se le de click al boton de historial de compras realizar un scroll down donde se muestren las facturas asociadas a este cliente si tiene -->
+                    <td><button type="button" name="button" class="btn btn-outline-primary">Ver detalle</button></td>
+                    <td><button type="button" name="button" class="btn btn-outline-primary">Editar</button></td>
+                    <td><button type="button" name="button" class="btn btn-outline-danger">Eliminar</button></td>
+
+                    <!-- <td>
+                        <button type="button" name="button" [routerLink]="['/clienteSeguimiento',cliente.id]"
+                            class="btn btn-outline-info">Historial de compras</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" [routerLink]="['/clientForm',cliente.id]"
+                            class="btn btn-outline-info">Editar</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" (click)='delete(cliente)'
+                            class="btn btn-outline-danger">Eliminar</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<app-footer></app-footer>

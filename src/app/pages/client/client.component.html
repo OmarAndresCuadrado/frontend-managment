@@ -1,0 +1,135 @@
+<app-header></app-header>
+
+<div class="col espacioArriba"></div>
+<div class="container">
+    <div class="row espacioArriba">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center espacioAbajo text-primary">
+            <h1>Lista de clientes</h1>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12 text-center text-dark">
+            <div class="form-group">
+                <input type="text" class="form-control" name="filterProyect"
+                    placeholder="Buscar cliente por nombre o numero de celular" [(ngModel)]="filterProyect">
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="card text-white bg-light espacioArriba">
+    <div class="my-2 text-right" style="padding-right: 20px;">
+        <button class="btn btn-outline-success" type="button" (click)="updateClients()">Actualizar clientes</button>
+    </div>
+    <div class="my-2 text-right" style="padding-right: 20px;">
+        <button class="btn btn-outline-info" type="button" [routerLink]="['/clientForm']">Crear Cliente</button>
+    </div>
+
+    <div class="card-body text-primary" style="padding-bottom: 40px;">
+
+
+        <div *ngIf="clientLIst?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos
+        </div>
+        <table class="table table-bordered table-striped text-center" ngif="clients?.length > 0">
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Contacto</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col"> Puntos</th>
+                    <th scope="col"> Privilegio</th>
+                    <th scope="col"> Fecha de creación</th>
+                    <th scope="col">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-bookmark-plus"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z" />
+                            <path fill-rule="evenodd"
+                                d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                        </svg>
+                    </th>
+                    <th scope="col">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                            <path fill-rule="evenodd"
+                                d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+                            <circle cx="3.5" cy="5.5" r=".5" />
+                            <circle cx="3.5" cy="8" r=".5" />
+                            <circle cx="3.5" cy="10.5" r=".5" />
+                        </svg>
+                    </th>
+                    <th scope="col">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-lines-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </th>
+                    <th scope="col">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clientLIst">
+                    <td>{{client.name}}</td>
+                    <td>{{client.lastName}}</td>
+                    <td>{{client.address}}</td>
+                    <td>{{client.phone}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.points}}</td>
+                    <td>{{client.privilages}}</td>
+                    <td>{{client.createAt}}</td>
+                    <!-- TODO: Cuando se le de click al boton de historial de compras realizar un scroll down donde se muestren las facturas asociadas a este cliente si tiene -->
+                    <td><button type="button" name="button" class="btn btn-success"
+                            [routerLink]="['/bill-form', client.id]">Crear factura +</button></td>
+                    <td><button type="button" name="button" class="btn btn-info" data-toggle="modal"
+                            data-target="#modalDetailBill" (click)="objectHeredate(client)">Ver facturas</button></td>
+                    <td><button type="button" name="button" class="btn btn-outline-primary"
+                            [routerLink]="['/clientForm', client.id]">Editar cliente</button></td>
+                    <td><button type="button" name="button" class="btn btn-outline-danger"
+                            (click)="deleteClient(client)">Borrar cliente x</button>
+                    </td>
+
+
+
+                    <!-- <td>
+                        <button type="button" name="button" [routerLink]="['/clienteSeguimiento',cliente.id]"
+                            class="btn btn-outline-info">Historial de compras</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" [routerLink]="['/clientForm',cliente.id]"
+                            class="btn btn-outline-info">Editar</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" (click)='delete(cliente)'
+                            class="btn btn-outline-danger">Eliminar</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<app-modal-bill-detail *ngIf="objetToHeredate" [client]="objetToHeredate"></app-modal-bill-detail>
+<app-footer></app-footer>

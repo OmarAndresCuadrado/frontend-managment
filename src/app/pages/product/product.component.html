@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div class="col espacioArriba"></div>
+<div class="container">
+    <div class="row espacioArriba">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center espacioAbajo text-primary">
+            <h1>Lista de productos</h1>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12 text-center text-dark">
+            <div class="form-group">
+                <input type="text" class="form-control" name="filterProyect"
+                    placeholder="Buscar cliente por nombre o numero de celular" [(ngModel)]="filterProyect">
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="card text-white bg-light espacioArriba">
+    <div class="my-2 text-right" style="padding-right: 20px;">
+        <button class="btn btn-outline-success" type="button" (click)="updateProducts()">Actualizar productos</button>
+    </div>
+    <div class="my-2 text-right" style="padding-right: 20px;">
+        <button class="btn btn-outline-info" type="button" [routerLink]="['/product-form']">Crear producto</button>
+    </div>
+
+    <div class="card-body text-primary" style="padding-bottom: 40px;">
+
+
+        <div *ngIf="listOfProducts?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos
+        </div>
+        <table class="table table-bordered table-striped text-center" ngif="clients?.length > 0">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Fecha de creacion</th>
+                    <th scope="col"> Editar</th>
+                    <!-- <th scope="col"> Eliminar</th> -->
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of listOfProducts">
+                    <td>{{product.name}}</td>
+                    <td>{{product.price | number}}</td>
+                    <td [ngStyle]="{'color': product.amount < 0 ? 'red' : 'blue'}"  >{{product.amount | number}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.createAt}}</td>
+                    <td><button type="button" name="button" class="btn btn-outline-primary" [routerLink]="['/product-form', product.id]" >Editar</button></td>
+                    <!-- <td><button type="button" name="button" class="btn btn-outline-danger" (click)="deleteProduct(product)">Eliminar</button></td> -->
+
+                    <!-- <td>
+                        <button type="button" name="button" [routerLink]="['/clienteSeguimiento',cliente.id]"
+                            class="btn btn-outline-info">Historial de compras</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" [routerLink]="['/clientForm',cliente.id]"
+                            class="btn btn-outline-info">Editar</button>
+                    </td>
+
+                    <td>
+                        <button type="button" name="button" (click)='delete(cliente)'
+                            class="btn btn-outline-danger">Eliminar</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<app-footer></app-footer>

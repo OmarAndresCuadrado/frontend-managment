@@ -1,0 +1,25 @@
+.espacioArriba {
+    padding-top: 20px;
+}
+
+.espacioAbajo {
+    padding-bottom: 20px;
+}
+
+.espacioIzquierda {
+    padding-left: 20px;
+}
+
+.espacioDerecha {
+    padding-left: 50px;
+}
+
+.espacioArribaMayor {
+    padding-top: 30px;
+}
+
+.imgSize {
+    height: 220px !important;
+    width: 470px !important;
+    cursor: pointer
+}

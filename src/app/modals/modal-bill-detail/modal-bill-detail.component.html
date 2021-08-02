@@ -1,0 +1,92 @@
+<!-- Modal -->
+
+<div class="modal fade personalScroll" id="modalDetailBill" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1200px;">
+            <div class="modal-header text-center">
+                <h5 class="modal-title text-primary" id="exampleModalLabel">Lista de facturas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="container">
+                <div class="row" style="padding-top: 20px;">
+                    <div class="col-12 text-center text-primary">
+                       <h4>Filtrar facturas</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row" style="padding-top: 20px;">
+                    <div class="col-12 text-center text-dark">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="filterBill"
+                                placeholder="Escriba la descripcion de la factura para realizar el filtro" [(ngModel)]="filterBill">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div *ngIf="client.bills.length <= 0" class="alert alert-info">
+                    No hay facturas asociadas al cliente {{client.name}}
+                </div>
+                <div *ngIf="client.bills.length > 0">
+                    <div class="row">
+                        <div *ngFor="let clientBill of client.bills | billFilter:filterBill; let i = index"
+                            class="card-body col-6" style="padding-top: 20px;">
+                            <div class="card border-info text-center">
+                                <h5 class="card-title">{{clientBill.description}}</h5>
+                                <p *ngIf="clientBill.observation" class="card-text text-primary">Observación: {{clientBill.observation}}</p>
+                                <p class="card-text">Fecha de creacion de factura: {{clientBill.createAt}}</p>
+                                <p class="card-text">Costo: <span
+                                        class="badge badge-secondary">{{clientBill.total  | number}}</span> </p>
+                                <button class="btn btn-outline-info" (click)="seeDetail(i)">Ver</button>
+                                <div *ngIf="detalleId == i">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center text-primary"> Productos de factura</h5>
+                                        <div style="padding-left: 20px;">
+                                            <table class="table table-bordered table-striped text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Producto</th>
+                                                        <th scope="col">Precio individual</th>
+                                                        <th scope="col">Cantidad</th>
+                                                        <th scope="col">Valor total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let clientBillDetail of client.bills[i].items ">
+                                                        <td>{{clientBillDetail.product.name}}</td>
+                                                        <td>{{clientBillDetail.product.price | number}}</td>
+                                                        <td>{{clientBillDetail.amount}}</td>
+                                                        <td>{{clientBillDetail.importe  | number}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                <!-- <div class="col-6">
+                                                    <button class="btn btn-info px-3" type="button" data-dismiss="modal"
+                                                        [routerLink]="['/bill-client',client.id, client.bills[i].id]">
+                                                        Editar factura </button>
+                                                </div> -->
+                                                <div class="col-12 text-center">
+                                                    <button class="btn btn-danger" type="button" (click)="deleteBill(clientBill)"> Eliminar
+                                                        factura
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<app-header></app-header>
+<div class="container espacioArribaMayor" *ngIf="billForm">
+    <div class="card border-primary text-dark">
+        <div class="card-header text-center"> Formulario de facturas</div>
+        <h4 class="card-title">
+            <a [routerLink]="['/client']" class="btn btn-light btn-xs text-primary">&laquo; volver</a>
+        </h4>
+        <div class="body">
+            <form #billFormValidator="ngForm">
+                <div class="form-group row" *ngIf="billForm.client">
+                    <label for="client" class="col-sm-2 col-form-label espacioDerecha">Cliente</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="cliente" value="{{billForm.client.name}} {{billForm.client.lastName}}"
+                            class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="row form-group espacioArriba">
+                    <label for="description" class="col-form-label col-sm-2 espacioDerecha">
+                        Descripcion</label>
+                    <div class="col-6" style="padding-left: 10px;">
+                        <input type="text" class="form-control" [(ngModel)]="billForm.description" name="description"
+                            #description="ngModel" required minlength="4" >
+                        <div class="alert alert-danger"
+                            *ngIf="description.invalid && (description.dirty || description.touched)">
+                            <div *ngIf="description.errors.required">
+                                La descripcion es requerida
+                            </div>
+                            <div *ngIf="description.errors.minlength">
+                                El campo debe tener minimo 4 caracteres
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group espacioArriba">
+                    <label for="" class="col-form-label col-2 espacioDerecha">
+                        Observacion</label>
+                    <div class="col-6" style="padding-right: 10px;">
+                        <textarea type="text" class="form-control" [(ngModel)]="billForm.observation"
+                            name="observation"></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group espacioArriba">
+                    <label for="" class="col-form-label col-2 espacioDerecha">
+                        Seleccionar productos</label>
+                    <mat-form-field style="padding-left: 15px;">
+                        <input type="text" placeholder="Añadir producto" aria-label="products" matInput
+                            [formControl]="autocompleteControll" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="showName"
+                            (optionSelected)="selectedProduct($event)">
+                            <mat-option *ngFor="let product of products | async" [value]="product">
+                                {{product.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="alert alert-info my-4" *ngIf="billForm.items.length == 0">Debe agregar por lo menos un
+                    producto para crear la factura </div>
+                <div class="card border-info" *ngIf="billForm.items.length > 0"
+                    style="padding-right: 25px; padding-left: 25px;">
+                    <table class="table table-striped table-hover table-sm text-center">
+                        <thead>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of billForm.items">
+                                <td>{{item.product.name}}</td>
+                                <td>{{item.product.price}}</td>
+                                <td> <input type="number" value="{{item.amount}}" class="form-control col-sm-4"
+                                        (change)="updateAmount(item.product.id, $event)"></td>
+                                <td>{{item.calcularImporte()}}</td>
+                                <td><button class="btn btn-danger" type="button"
+                                        (click)="deleteItemBill(item.product.id)">x</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- <div class="row">
+                        <div class="col-12 text-right">
+                            <label for="" class="col-form-label col-12 text-primary"> Valor
+                                Total <span class="badge badge-secondary"
+                                    style="font-size: 25px;">{{billForm.calcularGranTotal()}}
+                                </span></label>
+                        </div>
+                    </div> -->
+                </div>
+            </form>
+
+            <div class="row espacioArriba espacioAbajo ">
+                <div class="col-12 ">
+                    <!-- <div class="col-12 text-center ">
+                        <button type="button" (click)="saveBill()" *ngIf="!billForm.id else elseBlock "
+                            class="btn btn-info" [disabled]="!billFormValidator.form.valid">
+                            Guardar</button>
+                        <ng-template #elseBlock>
+                            <button type="button " (click)="updateBill()" class="btn btn-info ">Editar</button>
+                        </ng-template>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

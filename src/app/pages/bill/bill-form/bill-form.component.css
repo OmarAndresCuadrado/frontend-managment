@@ -1,0 +1,23 @@
+.espacioArriba {
+    padding-top: 20px;
+}
+
+.espacioAbajo {
+    padding-bottom: 20px;
+}
+
+.espacioIzquierda {
+    padding-left: 20px;
+}
+
+.espacioDerecha {
+    padding-left: 50px;
+}
+
+.espacioArribaMayor {
+    padding-top: 30px;
+}
+
+textarea {
+    resize: none;
+  }
